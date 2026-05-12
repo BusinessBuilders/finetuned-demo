@@ -1,11 +1,10 @@
 /* global React */
-const { useState: useState_P } = React;
 
 const TIERS = [
   {
     id: "starter",
     name: "Starter",
-    price: { monthly: 1199, annual: 1079 },
+    price: 1199,
     blurb: "A single-page site for businesses launching, testing demand, or pushing one offer.",
     features: [
       "Custom one-page design",
@@ -19,7 +18,7 @@ const TIERS = [
   {
     id: "growth",
     name: "Growth",
-    price: { monthly: 1699, annual: 1529 },
+    price: 1699,
     blurb: "Multi-page site with built-in booking — the everyday workhorse.",
     inherits: "Starter",
     features: [
@@ -37,7 +36,7 @@ const TIERS = [
   {
     id: "pro",
     name: "Pro",
-    price: { monthly: 2399, annual: 2159 },
+    price: 2399,
     blurb: "Everything in Growth, plus a working blog and three launch posts ready to rank.",
     inherits: "Growth",
     features: [
@@ -51,26 +50,19 @@ const TIERS = [
   },
 ];
 
-function PricingHeader({ billing, setBilling }) {
+function PricingHeader() {
   return (
     <div className="pricing-head">
       <span className="eyebrow">Pricing</span>
       <h2 className="display-md">Pick the plan that fits.</h2>
       <p className="body-lg" style={{color:"#2d2d2d", maxWidth: 560, margin: "0 auto"}}>
-        One-time build fee. Support windows included. No subscriptions, no surprise add-ons.
+        One-time build fee. Hosting and ongoing support available for $19.99/month after launch.
       </p>
-      <div className="billing-toggle" role="tablist" aria-label="Billing">
-        <button role="tab" aria-selected={billing==="monthly"} className={billing==="monthly"?"on":""} onClick={() => setBilling("monthly")}>One-time</button>
-        <button role="tab" aria-selected={billing==="annual"}  className={billing==="annual"?"on":""}  onClick={() => setBilling("annual")}>
-          Annual care plan <span className="save-pill">save 10%</span>
-        </button>
-      </div>
     </div>
   );
 }
 
-function PricingTier({ tier, billing, onPick }) {
-  const price = tier.price[billing];
+function PricingTier({ tier, onPick }) {
   return (
     <div className={`tier ${tier.featured ? "tier-featured" : ""}`}>
       {tier.featured && <div className="tier-badge"><i data-lucide="star"></i> Recommended</div>}
@@ -79,8 +71,8 @@ function PricingTier({ tier, billing, onPick }) {
         <p className="body-md tier-blurb">{tier.blurb}</p>
       </div>
       <div className="tier-price">
-        <span className="tier-amount">${price.toLocaleString()}</span>
-        <span className="tier-cadence">{billing==="annual" ? "/ year · all-in" : "one-time"}</span>
+        <span className="tier-amount">${tier.price.toLocaleString()}</span>
+        <span className="tier-cadence">one-time</span>
       </div>
       {tier.featured && (
         <div className="tier-differentiator">
@@ -104,16 +96,15 @@ function PricingTier({ tier, billing, onPick }) {
 }
 
 function Pricing({ onPick }) {
-  const [billing, setBilling] = useState_P("monthly");
   return (
     <section className="pricing" id="pricing">
       <div className="container">
-        <PricingHeader billing={billing} setBilling={setBilling} />
+        <PricingHeader />
         <div className="pricing-grid">
-          {TIERS.map(t => <PricingTier key={t.id} tier={t} billing={billing} onPick={onPick}/>)}
+          {TIERS.map(t => <PricingTier key={t.id} tier={t} onPick={onPick}/>)}
         </div>
         <p className="caption pricing-foot">
-          All plans include hosting setup, domain configuration, and a kickoff call. <b>Ongoing hosting and support: $19.99/month after launch</b> — cancel anytime, you always own the site. Need something custom? <a href="#contact">Talk to us</a>.
+          All plans include hosting setup, domain configuration, and a kickoff call. Hosting can be canceled anytime; you always own the site and the domain. Need something custom? <a href="#contact">Talk to us</a>.
         </p>
       </div>
     </section>
