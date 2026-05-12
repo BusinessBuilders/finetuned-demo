@@ -49,7 +49,7 @@ function ContactForm({ selectedTier }) {
       <label>Tier you're interested in
         <select className="input" name="tier" defaultValue={selectedTier || "Pro"}>
           <option>Starter — $1,199</option>
-          <option>Growth — $1,499</option>
+          <option>Growth — $1,699</option>
           <option>Pro — $2,399</option>
           <option>Not sure yet</option>
         </select>

@@ -19,7 +19,7 @@ const TIERS = [
   {
     id: "growth",
     name: "Growth",
-    price: { monthly: 1499, annual: 1349 },
+    price: { monthly: 1699, annual: 1529 },
     blurb: "Multi-page site with built-in booking — the everyday workhorse.",
     inherits: "Starter",
     features: [
